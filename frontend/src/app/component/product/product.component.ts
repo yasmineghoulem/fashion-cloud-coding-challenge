@@ -9,24 +9,31 @@ import { Product } from "../../model/product";
 })
 export class ProductComponent implements OnInit {
 	products: Product[] = [];
-  brand: string = '';
-  category: string = '';
-  sort: string = '';
+	brands: String[] = [];
+	categories: String[] = [];
+	brand: string = "";
+	category: string = "";
+	sort: string = "";
 
 	constructor(private productService: ProductService) {}
 
 	ngOnInit() {
 		this.getProducts();
+		this.getBrands();
+		this.getCategories();
 	}
-  onChange(brand: string, category: string, sort: string) {
-    // Access the value using event.target['value']
-    const brandValue = brand;
-    const categoryValue = category;
-    const sortValue = sort;
 
-    console.log(brandValue, categoryValue, sortValue);
+	onChange(brand: string, category: string, sort: string) {
+		this.productService.getProductsByFilters(brand, category, sort).subscribe({
+			next: (products: Product[]) => {
+				this.products = products;
+			},
+			error: (error) => {
+				console.error("Error fetching products:", error);
+			},
+		});
+	}
 
-  }
 	getProducts() {
 		this.productService.getProducts().subscribe({
 			next: (products: Product[]) => {
@@ -34,6 +41,28 @@ export class ProductComponent implements OnInit {
 			},
 			error: (error) => {
 				console.error("Error fetching products:", error);
+			},
+		});
+	}
+
+	getBrands() {
+		this.productService.getBrands().subscribe({
+			next: (brands: String[]) => {
+				this.brands = brands;
+			},
+			error: (error) => {
+				console.error("Error fetching brands:", error);
+			},
+		});
+	}
+
+	getCategories() {
+		this.productService.getCategories().subscribe({
+			next: (categories: String[]) => {
+				this.categories = categories;
+			},
+			error: (error) => {
+				console.error("Error fetching categories:", error);
 			},
 		});
 	}

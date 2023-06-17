@@ -23,6 +23,30 @@ class ProductRepository {
             return products;
         });
     }
+    findAllBrands() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const brands = yield product_1.ProductModel.distinct('brand');
+                return brands;
+            }
+            catch (error) {
+                console.error('Error retrieving brands:', error);
+                throw new Error('Failed to retrieve brands');
+            }
+        });
+    }
+    findAllCategories() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const categories = yield product_1.ProductModel.distinct('category');
+                return categories;
+            }
+            catch (error) {
+                console.error('Error retrieving categories:', error);
+                throw new Error('Failed to retrieve categories');
+            }
+        });
+    }
     findByBrand(brand) {
         return __awaiter(this, void 0, void 0, function* () {
             const products = yield product_1.ProductModel.find({ brand });
@@ -51,6 +75,17 @@ class ProductRepository {
         return __awaiter(this, void 0, void 0, function* () {
             const products = yield product_1.ProductModel.find().sort({ stock: -1 });
             return products;
+        });
+    }
+    findByBrandAndCategory(query, sort) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const products = yield product_1.ProductModel.find(query).sort(sort);
+                return products;
+            }
+            catch (error) {
+                throw error;
+            }
         });
     }
 }

@@ -1,86 +1,65 @@
-import { Request, Response } from 'express';
-import ProductRepository from '../repository/product';
-import { ProductDocument } from '../model/product';
+import { Request, Response } from "express";
+import ProductRepository from "../repository/product";
+import { ProductDocument } from "../model/product";
+import ProductService from "../service/product";
 
 class ProductController {
-  private repository: ProductRepository;
+	private repository: ProductRepository;
+	private service: ProductService;
 
-  constructor() {
-    this.repository = new ProductRepository();
-  }
+	constructor() {
+		this.repository = new ProductRepository();
+		this.service = new ProductService();
+	}
 
-  async create(req: Request, res: Response): Promise<void> {
-    try {
-      const productData: ProductDocument = req.body;
-      const createdProduct = await this.repository.create(productData);
-      res.status(201).json(createdProduct);
-    } catch (error) {
-      console.error('Error creating product:', error);
-      res.status(500).json({ message: 'Failed to create product' });
-    }
-  }
+	async getBrands(req: Request, res: Response): Promise<void> {
+		try {
+			const brands = await this.repository.findAllBrands();
+			res.status(200).json(brands);
+		} catch (error) {
+			console.error("Error retrieving brands:", error);
+			res.status(500).json({ message: "Failed to retrieve brands" });
+		}
+	}
 
-  async findAll(req: Request, res: Response): Promise<void> {
-    try {
-      const products = await this.repository.findAll();
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products:', error);
-      res.status(500).json({ message: 'Failed to retrieve products' });
-    }
-  }
+	async getCategories(req: Request, res: Response): Promise<void> {
+		try {
+			const categories = await this.repository.findAllCategories();
+			res.status(200).json(categories);
+		} catch (error) {
+			console.error("Error retrieving categories:", error);
+			res.status(500).json({ message: "Failed to retrieve categories" });
+		}
+	}
 
-  async findByBrand(req: Request, res: Response): Promise<void> {
-    try {
-      const { filter } = req.params;
-      const products = await this.repository.findByBrand(filter);
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products by brand:', error);
-      res.status(500).json({ message: 'Failed to retrieve products by brand' });
-    }
-  }
+	async findByStock(req: Request, res: Response): Promise<void> {
+		try {
+			const products = await this.repository.findByStock();
+			res.status(200).json(products);
+		} catch (error) {
+			console.error("Error retrieving products by highest stock:", error);
+			res
+				.status(500)
+				.json({ message: "Failed to retrieve products by highest stock" });
+		}
+	}
 
-  async findByCategory(req: Request, res: Response): Promise<void> {
-    try {
-        const { filter } = req.params;
-        const products = await this.repository.findByCategory(filter);
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products by category:', error);
-      res.status(500).json({ message: 'Failed to retrieve products by category' });
-    }
-  }
-
-  async findByPriceAscending(req: Request, res: Response): Promise<void> {
-    try {
-      const products = await this.repository.findByPriceAscending();
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products by ascending price:', error);
-      res.status(500).json({ message: 'Failed to retrieve products by ascending price' });
-    }
-  }
-
-  async findByPriceDescending(req: Request, res: Response): Promise<void> {
-    try {
-      const products = await this.repository.findByPriceDescending();
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products by descending price:', error);
-      res.status(500).json({ message: 'Failed to retrieve products by descending price' });
-    }
-  }
-
-  async findByStock(req: Request, res: Response): Promise<void> {
-    try {
-      const products = await this.repository.findByStock();
-      res.status(200).json(products);
-    } catch (error) {
-      console.error('Error retrieving products by highest stock:', error);
-      res.status(500).json({ message: 'Failed to retrieve products by highest stock' });
-    }
-  }
+	async findByBrandAndCategory(req: Request, res: Response): Promise<void> {
+		try {
+			const { brand, category, sort } = req.params;
+			const products = await this.service.filterByBrandAndCategory(
+				brand,
+				category,
+				sort
+			);
+			res.status(200).json(products);
+		} catch (error) {
+			console.error("Error retrieving products by brand and category:", error);
+			res
+				.status(500)
+				.json({ message: "Failed to retrieve products by brand and category" });
+		}
+	}
 }
 
 export default ProductController;

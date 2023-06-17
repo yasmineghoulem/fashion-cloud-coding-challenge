@@ -30,7 +30,7 @@ function start() {
     return __awaiter(this, void 0, void 0, function* () {
         yield connectDatabases();
         yield addBodyParser();
-        // Enable CORS for all routes 
+        // Enable CORS for all routes
         app.use(cors());
         // Product Routes
         app.use("/products", product_1.default);

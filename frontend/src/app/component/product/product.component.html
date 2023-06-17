@@ -1,26 +1,24 @@
-<div *ngIf="products.length > 0" style="padding: 20px;">
   <!-- Filter section -->
+  <div style="padding: 20px;">
   <h2>Filters</h2>
   <div class="filters">
     <select id="brand" class="filter-select" #brandSelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="">Brand Filter</option>
-      <option value="brand1">Brand 1</option>
-      <option value="brand2">Brand 2</option>
-      <option value="brand3">Brand 3</option>
+      <option value="all">Brand Filter</option>
+      <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
     </select>
     <select id="category" class="filter-select" #categorySelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="">Category Filter</option>
-      <option value="shirt">Shirt</option>
-      <option value="t-shirt">T-Shirt</option>
-      <option value="jacket">Jacket</option>
-      <option value="pants">Pants</option>
+      <option value="all">Category Filter</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
     </select>
     <select id="sort" class="filter-select" #sortSelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="">Sort Options</option>
-      <option value="ascending">Highest Price</option>
-      <option value="descending">Lowest Price</option>
+      <option value="any">Sort Options</option>
+      <option value="descending">Highest Price</option>
+      <option value="ascending">Lowest Price</option>
     </select>
   </div>
+</div>
+
+<div *ngIf="products.length > 0" style="padding: 20px;">
   <!-- Product gridview -->
   <div class="products">
     <h2 class="title">Products</h2>
@@ -44,6 +42,6 @@
     </div>
   </div>
 </div>
-<div *ngIf="products.length === 0">
-  <p>Loading products...</p>
+<div *ngIf="products.length === 0" style="padding: 20px;">
+  <p>No products...</p>
 </div>
