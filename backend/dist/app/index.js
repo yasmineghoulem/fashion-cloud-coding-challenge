@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const product_1 = require("./routes/product");
@@ -22,8 +23,6 @@ const addBodyParser = () => __awaiter(void 0, void 0, void 0, function* () {
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
 });
-// Product Routes
-app.use('/products', product_1.default);
 const listenPort = (PORT) => {
     app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 };
@@ -31,11 +30,14 @@ function start() {
     return __awaiter(this, void 0, void 0, function* () {
         yield connectDatabases();
         yield addBodyParser();
+        // Enable CORS for all routes 
+        app.use(cors());
+        // Product Routes
+        app.use("/products", product_1.default);
         yield listenPort(config_1.default.SERVICE_PORT);
     });
 }
-;
 exports.default = {
-    start
+    start,
 };
 //# sourceMappingURL=index.js.map

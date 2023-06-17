@@ -1,0 +1,94 @@
+.filters {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+
+.filter-select {
+  width: 200px;
+  padding: 5px;
+  margin-right: 20px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.products {
+   margin-top: 60px;
+
+   .title{
+    font-family:  Arial, sans-serif;
+   }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-gap: 10px;
+}
+
+.product-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  font-size: 12px;
+
+  &:hover {
+    box-shadow:  0 0 15px  rgba(0, 0, 0, 0.2);
+  }
+
+  img {
+    width: 50%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px; /* Add some spacing below the image */
+    object-fit: cover; /* Make all images the same size */
+  }
+
+  .product-info {
+    display: flex;
+    justify-content: space-between; /* Align columns with equal space between them */
+  }
+
+  .col {
+    flex-basis: 50%; /* Divide the available space equally between the columns */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content vertically within each column */
+  }
+  .product-info-left {
+    text-align: left; /* Align text to the left */
+  }
+
+  .product-info-right {
+    text-align: right; /* Align text to the right */
+  }
+  .name {
+    margin-bottom: 5px;
+  }
+
+  .brand {
+    margin-bottom: 5px;
+  }
+
+  .stock {
+    margin-bottom: 5px;
+  }
+
+  .price {
+    font-weight: bold;
+    color: green;
+    margin-bottom: 5px;
+
+  }
+
+}
+

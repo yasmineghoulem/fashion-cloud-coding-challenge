@@ -7,11 +7,14 @@ import { Product } from '../model/product';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3000/api/products'; // Replace with your API URL
+  private apiUrl = 'http://localhost:3000/products';
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+    let res = this.http.get<Product[]>(this.apiUrl);
+    console.log(res);
+
+    return res
   }
 }
