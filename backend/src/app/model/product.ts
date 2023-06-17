@@ -1,6 +1,6 @@
 import mongoose, { Document, Schema, Model } from 'mongoose';
 
-interface IProduct extends Document {
+interface Product {
   gtin: number;
   name: string;
   image: string;
@@ -11,7 +11,9 @@ interface IProduct extends Document {
   price: number;
 }
 
-const ProductSchema: Schema<IProduct> = new Schema(
+interface ProductDocument extends Product, Document {}
+
+const ProductSchema: Schema<ProductDocument> = new Schema(
   {
     gtin: { type: Number, required: true, unique: true },
     name: { type: String, required: true },
@@ -26,24 +28,24 @@ const ProductSchema: Schema<IProduct> = new Schema(
 );
 
 // Pre-save middleware to generate unique GTIN
-ProductSchema.pre<IProduct>('save', async function (next) {
-    let generatedGTIN: number | undefined;
-  
-    // Retry generation until a unique GTIN is obtained
-    while (!generatedGTIN) {
-      const candidateGTIN = Math.floor(1000000000000 + Math.random() * 9000000000000);
-      const existingProduct = await ProductModel.findOne({ gtin: candidateGTIN });
-  
-      if (!existingProduct) {
-        generatedGTIN = candidateGTIN;
-      }
-    }
-  
-    this.gtin = generatedGTIN;
-    console.log('Generated GTIN:', this.gtin);
-    next();
-  });
-  
-const ProductModel: Model<IProduct> = mongoose.model<IProduct>('products', ProductSchema);
+ProductSchema.pre<ProductDocument>('save', async function (next) {
+  let generatedGTIN: number | undefined;
 
-export default ProductModel;
+  // Retry generation until a unique GTIN is obtained
+  while (!generatedGTIN) {
+    const candidateGTIN = Math.floor(1000000000000 + Math.random() * 9000000000000);
+    const existingProduct = await ProductModel.findOne({ gtin: candidateGTIN });
+
+    if (!existingProduct) {
+      generatedGTIN = candidateGTIN;
+    }
+  }
+
+  this.gtin = generatedGTIN;
+  console.log('Generated GTIN:', this.gtin);
+  next();
+});
+
+const ProductModel: Model<ProductDocument> = mongoose.model<ProductDocument>('Product', ProductSchema);
+
+export { Product, ProductDocument, ProductModel };

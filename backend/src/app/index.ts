@@ -1,8 +1,10 @@
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
+import productRoutes from './routes/product';
 import DBConnector from './db-connector';
 import Config from './config';
+
 
 const app = express();
 
@@ -14,6 +16,9 @@ const addBodyParser = async () => {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
 };
+
+// Product Routes
+app.use('/products', productRoutes);
 
 const listenPort = (PORT) => {
     app.listen( PORT, () =>

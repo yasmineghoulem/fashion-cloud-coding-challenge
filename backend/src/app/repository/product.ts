@@ -1,51 +1,40 @@
-const Product = require('../models/product');
+import { ProductDocument, ProductModel } from '../model/product';
 
 class ProductRepository {
-  static async createProduct(productData) {
-    try {
-      const product = new Product(productData);
-      const createdProduct = await product.save();
-      return createdProduct;
-    } catch (error) {
-      throw error;
-    }
+  async create(productData: ProductDocument): Promise<ProductDocument> {
+    const createdProduct = await ProductModel.create(productData);
+    return createdProduct;
   }
 
-  static async getProductById(productId) {
-    try {
-      const product = await Product.findById(productId);
-      return product;
-    } catch (error) {
-      throw error;
-    }
+  async findAll(): Promise<ProductDocument[]> {
+    const products = await ProductModel.find();
+    return products;
   }
 
-  static async updateProduct(productId, updateData) {
-    try {
-      const updatedProduct = await Product.findByIdAndUpdate(productId, updateData, { new: true });
-      return updatedProduct;
-    } catch (error) {
-      throw error;
-    }
+  async findByBrand(brand: string): Promise<ProductDocument[]> {
+    const products = await ProductModel.find({ brand });
+    return products;
   }
 
-  static async deleteProduct(productId) {
-    try {
-      const deletedProduct = await Product.findByIdAndDelete(productId);
-      return deletedProduct;
-    } catch (error) {
-      throw error;
-    }
+  async findByCategory(category: string): Promise<ProductDocument[]> {
+    const products = await ProductModel.find({ category });
+    return products;
   }
 
-  static async getAllProducts() {
-    try {
-      const products = await Product.find();
-      return products;
-    } catch (error) {
-      throw error;
-    }
+  async findByPriceAscending(): Promise<ProductDocument[]> {
+    const products = await ProductModel.find().sort({ price: 1 });
+    return products;
+  }
+
+  async findByPriceDescending(): Promise<ProductDocument[]> {
+    const products = await ProductModel.find().sort({ price: -1 });
+    return products;
+  }
+
+  async findByStock(): Promise<ProductDocument[]> {
+    const products = await ProductModel.find().sort({ stock: -1 });
+    return products;
   }
 }
 
-module.exports = ProductRepository;
+export default ProductRepository;

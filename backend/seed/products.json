@@ -1,7 +1,7 @@
 [
   {
     "gtin": "1234567890123",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 500,
     "category": "shirt",
     "color": "blue",
@@ -11,7 +11,7 @@
   },
   {
     "gtin": "1234567890124",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 300,
     "category": "pant",
     "color": "black",
@@ -21,7 +21,7 @@
   },
   {
     "gtin": "1234567890125",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 150,
     "category": "jacket",
     "color": "brown",
@@ -31,7 +31,7 @@
   },
   {
     "gtin": "1234567890126",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 200,
     "category": "shirt",
     "color": "red",
@@ -41,7 +41,7 @@
   },
   {
     "gtin": "1234567890127",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 250,
     "category": "pant",
     "color": "green",
@@ -51,7 +51,7 @@
   },
   {
     "gtin": "1234567890128",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 100,
     "category": "jacket",
     "color": "gray",
@@ -61,7 +61,7 @@
   },
   {
     "gtin": "1234567890129",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 50,
     "category": "shirt",
     "color": "white",
@@ -71,7 +71,7 @@
   },
   {
     "gtin": "1234567890131",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 100,
     "category": "jacket",
     "color": "black",
@@ -81,7 +81,7 @@
   },
   {
     "gtin": "1234567890132",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 150,
     "category": "shirt",
     "color": "gray",
@@ -91,7 +91,7 @@
   },
   {
     "gtin": "1234567890134",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 75,
     "category": "jacket",
     "color": "brown",
@@ -101,7 +101,7 @@
   },
   {
     "gtin": "1234567891129",
-    "brandName": "Nova",
+    "brand": "Nova",
     "stock": 100,
     "category": "jacket",
     "color": "black",
@@ -111,7 +111,7 @@
   },
   {
     "gtin": "1234567891130",
-    "brandName": "Nova",
+    "brand": "Nova",
     "stock": 150,
     "category": "shirt",
     "color": "gray",
@@ -121,7 +121,7 @@
   },
   {
     "gtin": "1234567891132",
-    "brandName": "Nova",
+    "brand": "Nova",
     "stock": 75,
     "category": "jacket",
     "color": "brown",
@@ -131,7 +131,7 @@
   },
   {
     "gtin": "1234567891133",
-    "brandName": "Nova",
+    "brand": "Nova",
     "stock": 200,
     "category": "shirt",
     "color": "blue",
@@ -141,7 +141,7 @@
   },
   {
     "gtin": "1234567891135",
-    "brandName": "Nova",
+    "brand": "Nova",
     "stock": 500,
     "category": "shirt",
     "color": "red",
@@ -151,7 +151,7 @@
   },
   {
     "gtin": "1234537890125",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 150,
     "category": "jacket",
     "color": "brown",
@@ -161,7 +161,7 @@
   },
   {
     "gtin": "1234567890141",
-    "brandName": "Aurora",
+    "brand": "Aurora",
     "stock": 200,
     "category": "shirt",
     "color": "red",
