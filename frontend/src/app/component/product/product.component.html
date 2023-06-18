@@ -1,47 +1,50 @@
-  <!-- Filter section -->
-  <div style="padding: 20px;">
-  <h2>Filters</h2>
-  <div class="filters">
-    <select id="brand" class="filter-select" #brandSelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="all">Brand Filter</option>
-      <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
-    </select>
-    <select id="category" class="filter-select" #categorySelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="all">Category Filter</option>
-      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-    </select>
-    <select id="sort" class="filter-select" #sortSelect (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
-      <option value="any">Sort Options</option>
-      <option value="descending">Highest Price</option>
-      <option value="ascending">Lowest Price</option>
-    </select>
-  </div>
-</div>
+    <!-- Filter section -->
+    <div style="padding: 20px;">
+      <h2>Filters</h2>
+      <div class="filters">
+        <select id="brand" class="filter-select" #brandSelect
+          (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
+          <option value="all">Brand Filter</option>
+          <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+        </select>
+        <select id="category" class="filter-select" #categorySelect
+          (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
+          <option value="all">Category Filter</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+        </select>
+        <select id="sort" class="filter-select" #sortSelect
+          (change)="onChange(brandSelect.value, categorySelect.value, sortSelect.value)">
+          <option value="any">Sort Options</option>
+          <option value="descending">Highest Price</option>
+          <option value="ascending">Lowest Price</option>
+        </select>
+      </div>
+    </div>
 
-<div *ngIf="products.length > 0" style="padding: 20px;">
-  <!-- Product gridview -->
-  <div class="products">
-    <h2 class="title">Products</h2>
-    <div class="product-grid">
-      <div class="product-item" *ngFor="let product of products">
-        <div class="product-card">
-          <img [src]="'assets/productImages/' + product.image" alt="{{ product.name }}" />
+    <div *ngIf="products.length > 0" style="padding: 20px;">
+      <!-- Product gridview -->
+      <div class="products">
+        <h2 class="title">Products</h2>
+        <div class="product-grid">
+          <div class="product-item" *ngFor="let product of products">
+            <div class="product-card">
+              <img [src]="'assets/productImages/' + product.image" alt="{{ product.name }}" />
 
-          <div class="product-info product-details">
-            <div class="product-info-left">
-              <h3 class="name">{{ product.name }}</h3>
-              <p class="brand">{{ product.brand }}</p>
-            </div>
-            <div class="product-info-right">
-              <p class="stock">{{ product.stock }} in stock</p>
-              <p class="price">{{ product.price }} €</p>
+              <div class="product-info product-details">
+                <div class="product-info-left">
+                  <h3 class="name">{{ product.name }}</h3>
+                  <p class="brand">{{ product.brand }}</p>
+                </div>
+                <div class="product-info-right">
+                  <p class="stock">{{ product.stock }} in stock</p>
+                  <p class="price">{{ product.price }} €</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div *ngIf="products.length === 0" style="padding: 20px;">
-  <p>No products...</p>
-</div>
+    <div *ngIf="products.length === 0" style="padding: 20px;">
+      <p>No products...</p>
+    </div>

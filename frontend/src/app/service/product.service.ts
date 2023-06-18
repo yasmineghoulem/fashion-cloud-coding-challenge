@@ -13,10 +13,9 @@ export class ProductService {
 
 	getProducts(): Observable<Product[]> {
 		let res = this.http.get<Product[]>(this.apiUrl);
-		console.log(res);
-
 		return res;
 	}
+
 	getBrands(): Observable<String[]> {
 		let res = this.http.get<String[]>(this.apiUrl + "/brands");
 		return res;
@@ -26,6 +25,7 @@ export class ProductService {
 		let res = this.http.get<String[]>(this.apiUrl + "/categories");
 		return res;
 	}
+
 	getProductsByFilters(
 		brand: string,
 		category: string,

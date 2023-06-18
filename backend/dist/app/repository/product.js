@@ -24,7 +24,6 @@ class ProductRepository {
                 return brands;
             }
             catch (error) {
-                console.error("Error retrieving brands:", error);
                 throw new Error("Failed to retrieve brands");
             }
         });
@@ -36,7 +35,6 @@ class ProductRepository {
                 return categories;
             }
             catch (error) {
-                console.error("Error retrieving categories:", error);
                 throw new Error("Failed to retrieve categories");
             }
         });
@@ -51,7 +49,6 @@ class ProductRepository {
                 return products;
             }
             catch (error) {
-                console.error('Error retrieving products by highest stock:', error);
                 throw new Error('Failed to retrieve products by highest stock');
             }
         });

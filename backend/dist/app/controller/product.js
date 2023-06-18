@@ -12,9 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const product_1 = require("../repository/product");
 const product_2 = require("../service/product");
 class ProductController {
-    constructor() {
-        this.repository = new product_1.default();
-        this.service = new product_2.default();
+    constructor(repositoryTest, serviceTest) {
+        this.repository = repositoryTest || new product_1.default();
+        this.service = serviceTest || new product_2.default();
     }
     getBrands(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,7 +23,6 @@ class ProductController {
                 res.status(200).json(brands);
             }
             catch (error) {
-                console.error("Error retrieving brands:", error);
                 res.status(500).json({ message: "Failed to retrieve brands" });
             }
         });
@@ -35,7 +34,6 @@ class ProductController {
                 res.status(200).json(categories);
             }
             catch (error) {
-                console.error("Error retrieving categories:", error);
                 res.status(500).json({ message: "Failed to retrieve categories" });
             }
         });
@@ -47,7 +45,6 @@ class ProductController {
                 res.status(200).json(products);
             }
             catch (error) {
-                console.error("Error retrieving products by highest stock:", error);
                 res
                     .status(500)
                     .json({ message: "Failed to retrieve products by highest stock" });
@@ -62,7 +59,6 @@ class ProductController {
                 res.status(200).json(products);
             }
             catch (error) {
-                console.error("Error retrieving products by brand and category:", error);
                 res
                     .status(500)
                     .json({ message: "Failed to retrieve products by brand and category" });
