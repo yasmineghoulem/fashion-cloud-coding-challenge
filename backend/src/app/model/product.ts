@@ -32,26 +32,26 @@ ProductSchema.index({ stock: -1 });
 ProductSchema.index({ category: 1, brand: 1, price: 1 });
 ProductSchema.index({ category: 1, brand: 1, price: -1 });
 
-// Pre-save middleware to generate unique GTIN
-ProductSchema.pre<ProductDocument>("save", async function (next) {
-	let generatedGTIN: number | undefined;
+// // Pre-save middleware to generate unique GTIN
+// ProductSchema.pre<ProductDocument>("save", async function (next) {
+// 	let generatedGTIN: number | undefined;
 
-	// Retry generation until a unique GTIN is obtained
-	while (!generatedGTIN) {
-		const candidateGTIN = Math.floor(
-			1000000000000 + Math.random() * 9000000000000
-		);
-		const existingProduct = await ProductModel.findOne({ gtin: candidateGTIN });
+// 	// Retry generation until a unique GTIN is obtained
+// 	while (!generatedGTIN) {
+// 		const candidateGTIN = Math.floor(
+// 			1000000000000 + Math.random() * 9000000000000
+// 		);
+// 		const existingProduct = await ProductModel.findOne({ gtin: candidateGTIN });
 
-		if (!existingProduct) {
-			generatedGTIN = candidateGTIN;
-		}
-	}
+// 		if (!existingProduct) {
+// 			generatedGTIN = candidateGTIN;
+// 		}
+// 	}
 
-	this.gtin = generatedGTIN;
-	console.log("Generated GTIN:", this.gtin);
-	next();
-});
+// 	this.gtin = generatedGTIN;
+// 	console.log("Generated GTIN:", this.gtin);
+// 	next();
+// });
 
 const ProductModel: Model<ProductDocument> = mongoose.model<ProductDocument>(
 	"Product",

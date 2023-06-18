@@ -5,7 +5,8 @@
       "outDir": "dist",
       "sourceMap": true,
       "lib": ["es2017"],
-      "baseUrl": "."
+      "baseUrl": ".",
+      "types": ["node", "jest"]
   },
   "include": [
       "src/**/*.ts"
