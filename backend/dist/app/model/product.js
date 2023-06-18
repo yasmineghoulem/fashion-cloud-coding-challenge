@@ -21,8 +21,11 @@ const ProductSchema = new mongoose_1.Schema({
     stock: { type: Number, required: true },
     price: { type: Number, required: true },
 }, { timestamps: true });
+// Indexes
+ProductSchema.index({ stock: -1 });
+ProductSchema.index({ category: 1, brand: 1, price: 1 });
 // Pre-save middleware to generate unique GTIN
-ProductSchema.pre('save', function (next) {
+ProductSchema.pre("save", function (next) {
     return __awaiter(this, void 0, void 0, function* () {
         let generatedGTIN;
         // Retry generation until a unique GTIN is obtained
@@ -34,10 +37,10 @@ ProductSchema.pre('save', function (next) {
             }
         }
         this.gtin = generatedGTIN;
-        console.log('Generated GTIN:', this.gtin);
+        console.log("Generated GTIN:", this.gtin);
         next();
     });
 });
-const ProductModel = mongoose_1.default.model('Product', ProductSchema);
+const ProductModel = mongoose_1.default.model("Product", ProductSchema);
 exports.ProductModel = ProductModel;
 //# sourceMappingURL=product.js.map

@@ -17,70 +17,56 @@ class ProductRepository {
             return createdProduct;
         });
     }
-    findAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find();
-            return products;
-        });
-    }
     findAllBrands() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const brands = yield product_1.ProductModel.distinct('brand');
+                const brands = yield product_1.ProductModel.distinct("brand");
                 return brands;
             }
             catch (error) {
-                console.error('Error retrieving brands:', error);
-                throw new Error('Failed to retrieve brands');
+                console.error("Error retrieving brands:", error);
+                throw new Error("Failed to retrieve brands");
             }
         });
     }
     findAllCategories() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const categories = yield product_1.ProductModel.distinct('category');
+                const categories = yield product_1.ProductModel.distinct("category");
                 return categories;
             }
             catch (error) {
-                console.error('Error retrieving categories:', error);
-                throw new Error('Failed to retrieve categories');
+                console.error("Error retrieving categories:", error);
+                throw new Error("Failed to retrieve categories");
             }
-        });
-    }
-    findByBrand(brand) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find({ brand });
-            return products;
-        });
-    }
-    findByCategory(category) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find({ category });
-            return products;
-        });
-    }
-    findByPriceAscending() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find().sort({ price: 1 });
-            return products;
-        });
-    }
-    findByPriceDescending() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find().sort({ price: -1 });
-            return products;
         });
     }
     findByStock() {
         return __awaiter(this, void 0, void 0, function* () {
-            const products = yield product_1.ProductModel.find().sort({ stock: -1 });
-            return products;
+            try {
+                const pipeline = [
+                    { $sort: { stock: -1 } }
+                ];
+                const products = yield product_1.ProductModel.aggregate(pipeline);
+                return products;
+            }
+            catch (error) {
+                console.error('Error retrieving products by highest stock:', error);
+                throw new Error('Failed to retrieve products by highest stock');
+            }
         });
     }
     findByBrandAndCategory(query, sort) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const products = yield product_1.ProductModel.find(query).sort(sort);
+                const pipeline = [];
+                if (Object.keys(query).length > 0) {
+                    pipeline.push({ $match: query });
+                }
+                if (Object.keys(sort).length > 0) {
+                    pipeline.push({ $sort: sort });
+                }
+                const products = yield product_1.ProductModel.aggregate(pipeline);
                 return products;
             }
             catch (error) {

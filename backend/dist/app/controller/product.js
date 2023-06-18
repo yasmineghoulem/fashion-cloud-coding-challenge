@@ -16,31 +16,6 @@ class ProductController {
         this.repository = new product_1.default();
         this.service = new product_2.default();
     }
-    create(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const productData = req.body;
-                const createdProduct = yield this.repository.create(productData);
-                res.status(201).json(createdProduct);
-            }
-            catch (error) {
-                console.error("Error creating product:", error);
-                res.status(500).json({ message: "Failed to create product" });
-            }
-        });
-    }
-    findAll(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const products = yield this.repository.findAll();
-                res.status(200).json(products);
-            }
-            catch (error) {
-                console.error("Error retrieving products:", error);
-                res.status(500).json({ message: "Failed to retrieve products" });
-            }
-        });
-    }
     getBrands(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

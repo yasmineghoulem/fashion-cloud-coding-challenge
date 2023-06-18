@@ -1,3 +1,4 @@
+import { PipelineStage } from "mongoose";
 import { ProductDocument, ProductModel } from "../model/product";
 
 class ProductRepository {
@@ -26,17 +27,36 @@ class ProductRepository {
 		}
 	}
 
-	async findByStock(): Promise<ProductDocument[]> {
-		const products = await ProductModel.find().sort({ stock: -1 });
-		return products;
-	}
+  async findByStock(): Promise<ProductDocument[]> {
+    try {
+      const pipeline: PipelineStage[] = [
+        { $sort: { stock: -1 } }
+      ];
+  
+      const products = await ProductModel.aggregate(pipeline);
+      return products;
+    } catch (error) {
+      console.error('Error retrieving products by highest stock:', error);
+      throw new Error('Failed to retrieve products by highest stock');
+    }
+  }
 
 	async findByBrandAndCategory(
 		query: any,
 		sort: any
 	): Promise<ProductDocument[]> {
 		try {
-			const products = await ProductModel.find(query).sort(sort);
+			const pipeline = [];
+
+			if (Object.keys(query).length > 0) {
+				pipeline.push({ $match: query });
+			}
+
+			if (Object.keys(sort).length > 0) {
+				pipeline.push({ $sort: sort });
+			}
+
+			const products = await ProductModel.aggregate(pipeline);
 			return products;
 		} catch (error) {
 			throw error;
