@@ -1,11 +1,11 @@
-import { ProductModel, ProductDocument } from "./product";
+import { ProductModel } from "./product";
 import DBConnector from "../db-connector";
 import mongoose from "mongoose";
 import Config from "../config";
 
 describe("Product Model", () => {
 	beforeAll(async () => {
-		await DBConnector.connectMongo(Config.MONGO_URL + Config.FASHION_CLOUD_DB);
+		await DBConnector.connectMongo(Config.MONGO_URL + Config.FASHION_CLOUD_DB_TEST);
 	});
 
 	afterAll(async () => {
@@ -34,12 +34,13 @@ describe("Product Model", () => {
 			stock: 10,
 			price: 99.99,
 		};
-		const createdProduct = await ProductModel.create(productData);
+		let createdProduct = await ProductModel.create(productData);
 		expect(createdProduct).toHaveProperty("_id");
 		expect(createdProduct.gtin).toBe(productData.gtin);
 		expect(createdProduct.name).toBe(productData.name);
 	});
-  it("should not create a new product Validation Error", async () => {
+
+	it("should not create a new product Validation Error", async () => {
 		const productData = {
 			gtin: 2838439408936,
 			name: "test Product",
@@ -49,7 +50,6 @@ describe("Product Model", () => {
 			stock: 10,
 			price: 99.99,
 		};
-    await expect(ProductModel.create(productData)).rejects.toThrowError();
-    ;
+		await expect(ProductModel.create(productData)).rejects.toThrowError();
 	});
 });

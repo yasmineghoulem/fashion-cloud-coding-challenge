@@ -12,7 +12,6 @@ class ProductRepository {
 			const brands = await ProductModel.distinct("brand");
 			return brands;
 		} catch (error) {
-			console.error("Error retrieving brands:", error);
 			throw new Error("Failed to retrieve brands");
 		}
 	}
@@ -22,7 +21,6 @@ class ProductRepository {
 			const categories = await ProductModel.distinct("category");
 			return categories;
 		} catch (error) {
-			console.error("Error retrieving categories:", error);
 			throw new Error("Failed to retrieve categories");
 		}
 	}
@@ -36,7 +34,6 @@ class ProductRepository {
       const products = await ProductModel.aggregate(pipeline);
       return products;
     } catch (error) {
-      console.error('Error retrieving products by highest stock:', error);
       throw new Error('Failed to retrieve products by highest stock');
     }
   }
