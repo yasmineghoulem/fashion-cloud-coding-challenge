@@ -85,10 +85,8 @@ describe("ProductComponent", () => {
 		expect(filterSection).toBeTruthy();
 	});
 
-	// it("should render the product grid view", () => {
-  //   const productsSection = fixture.nativeElement.querySelector(".products-grid");
-  //   console.log("product Section:", productsSection);
-  //   console.log("nativ Section:",fixture.nativeElement)
-	// 	expect(productsSection).toBeTruthy();
-	// });
+	it("should render the product grid view", () => {
+    const productsSection = fixture.nativeElement.querySelector(".product-grid");
+		expect(productsSection).toBeTruthy();
+	});
 });
